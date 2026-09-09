@@ -7,6 +7,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
+import { CreateRolDto } from './dto/create-rol.dto';
 
 @Controller('roles')
 export class RolesController {
@@ -22,7 +23,7 @@ export class RolesController {
   }
 
   @Post()
-  createRol(@Body() payload: any) {
+  createRol(@Body() payload: CreateRolDto) {
     return payload;
   }
 }
