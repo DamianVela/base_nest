@@ -1,13 +1,16 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { CreateRolDto } from './dto/create-rol.dto';
+import { UpdateRolDto } from './dto/update-rol-dto';
 
 @Controller('roles')
 export class RolesController {
@@ -17,13 +20,26 @@ export class RolesController {
     return this.rolesService.findAll();
   }
 
-  @Get(':id')
-  getRolById(@Param('id', ParseIntPipe) id: number) {
-    return this.rolesService.findByPk(id);
+  @Get(':idrol')
+  getRolById(@Param('idrol', ParseIntPipe) idrol: number) {
+    return this.rolesService.findByPk(idrol);
   }
 
   @Post()
   createRol(@Body() payload: CreateRolDto) {
-    return payload;
+    return this.rolesService.createRol(payload);
+  }
+
+  @Put(':idrol')
+  updateRol(
+    @Param('idrol', ParseIntPipe) idrol: number,
+    @Body() payload: UpdateRolDto,
+  ) {
+    return this.rolesService.updateRol(idrol, payload);
+  }
+
+  @Delete(':idrol')
+  deleteRol(@Param('idrol', ParseIntPipe) idrol: number) {
+    return this.rolesService.deleteRol(idrol);
   }
 }
