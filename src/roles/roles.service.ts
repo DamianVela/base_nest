@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Rol } from './interfaces/rol.interface';
 import { CreateRolDto } from './dto/create-rol.dto';
 import { UpdateRolDto } from './dto/update-rol-dto';
+import { PaginacionDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class RolesService {
@@ -19,7 +20,8 @@ export class RolesService {
       Area: 'AD',
     },
   ];
-  findAll() {
+  findAll(paginacion: PaginacionDto) {
+    console.log(paginacion);
     return this.roles;
   }
   findByPk(id: number) {

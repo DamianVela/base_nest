@@ -7,17 +7,19 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { CreateRolDto } from './dto/create-rol.dto';
 import { UpdateRolDto } from './dto/update-rol-dto';
+import { PaginacionDto } from '../common/dto/pagination.dto';
 
 @Controller('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
   @Get()
-  getAllRoles() {
-    return this.rolesService.findAll();
+  getAllRoles(@Query() paginacion: PaginacionDto) {
+    return this.rolesService.findAll(paginacion);
   }
 
   @Get(':idrol')
