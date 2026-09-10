@@ -12,9 +12,9 @@ export class PaginacionDto {
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  readonly limit: number = 10;
+  readonly limit?: number;
 
   get offset(): number {
-    return (this.pagina - 1) * this.limit;
+    return (this.pagina - 1) * (this.limit ?? 10);
   }
 }

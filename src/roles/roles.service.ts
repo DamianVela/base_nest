@@ -21,7 +21,9 @@ export class RolesService {
     },
   ];
   findAll(paginacion: PaginacionDto) {
-    console.log(paginacion);
+    const { limit, offset } = paginacion;
+    console.log(limit);
+    console.log(offset);
     return this.roles;
   }
   findByPk(id: number) {
