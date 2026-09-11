@@ -13,7 +13,7 @@ export class PermisosController {
   constructor(private readonly permisosService: PermisosService) {}
   @Get(':idrol')
   @UseGuards(JwtAuthGuard)
-  getRolById(@Param('idrol', ParseIntPipe) idrol: number) {
+  getAllPermisosDeRol(@Param('idrol', ParseIntPipe) idrol: number) {
     return this.permisosService.findAll(idrol);
   }
 }

@@ -11,7 +11,7 @@ import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
 import { AuthModule } from './auth/auth.module';
 import { AgentesModule } from './agentes/agentes.module';
 import { SocketsModule } from './sockets/sockets.module';
-import { PermisosModule } from './modulos/rrhh/permisos/permisos.module';
+import { SeguridadModule } from './modulos/seguridad/seguridad.module';
 
 @Module({
   imports: [
@@ -41,12 +41,12 @@ import { PermisosModule } from './modulos/rrhh/permisos/permisos.module';
       }),
     }),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
-    RrhhModule,
-    UbicacionesModule,
     AuthModule,
     AgentesModule,
     SocketsModule,
-    PermisosModule,
+    SeguridadModule,
+    RrhhModule,
+    UbicacionesModule,
   ],
 })
 export class AppModule {}
