@@ -29,7 +29,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
             'dbTrustServerCertificate',
           ),
         },
-        autoLoadEntities: false,
+        autoLoadEntities: true,
         synchronize: false,
       }),
     }),

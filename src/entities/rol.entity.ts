@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Persona } from './personal.entity';
 
 @Entity('ROLES')
 export class Rol {
@@ -24,4 +25,6 @@ export class Rol {
     nullable: false,
   })
   Area: string;
+
+  @OneToMany(() => Persona, (persona) => persona.rol) personas: Persona[];
 }

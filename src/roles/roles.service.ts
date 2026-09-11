@@ -1,61 +1,37 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Rol } from './interfaces/rol.interface';
-import { CreateRolDto } from './dto/create-rol.dto';
-import { UpdateRolDto } from './dto/update-rol-dto';
-import { PaginacionDto } from '../common/dto/pagination.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Rol } from '../entities/rol.entity';
+import { Repository } from 'typeorm';
+import { SearchRolDto } from './dto/search-rol.dto';
 
 @Injectable()
 export class RolesService {
-  private roles: Rol[] = [
-    {
-      IdRol: 2,
-      Descripcion: 'Operador',
-      Nivel: 9,
-      Area: 'OP',
-    },
-    {
-      IdRol: 1,
-      Descripcion: 'Admin',
-      Nivel: 1,
-      Area: 'AD',
-    },
-  ];
-  findAll(paginacion: PaginacionDto) {
-    const { limit, offset } = paginacion;
-    console.log(limit);
-    console.log(offset);
-    return this.roles;
+  constructor(
+    @InjectRepository(Rol)
+    private readonly rolesRepository: Repository<Rol>,
+  ) {}
+  async findAll(busqueda: SearchRolDto) {
+    const { descripcion, nivel, area } = busqueda;
+    const roles = await this.rolesRepository.find({
+      where: {
+        ...(descripcion && { Descripcion: descripcion }),
+        ...(nivel && { Nivel: nivel }),
+        ...(area && { Area: area }),
+      },
+    });
+    return {
+      roles,
+    };
   }
-  findByPk(id: number) {
-    const rol = this.roles.find((r) => r.IdRol === id);
+  async findByPk(id: number) {
+    const rol = await this.rolesRepository.findOne({
+      where: {
+        IdRol: id,
+      },
+    });
     if (!rol) {
       throw new NotFoundException('No se encontró el rol');
     }
     return rol;
-  }
-  createRol(createRolDto: CreateRolDto) {
-    const rol: Rol = {
-      IdRol: 3,
-      Descripcion: createRolDto.descripcion,
-      Nivel: createRolDto.nivel,
-      Area: createRolDto.area,
-    };
-    this.roles.push(rol);
-    return rol;
-  }
-  updateRol(idrol: number, updateRolDto: UpdateRolDto) {
-    const rolDB = this.findByPk(idrol);
-    const rol: Rol = {
-      IdRol: rolDB.IdRol,
-      Descripcion: updateRolDto.descripcion,
-      Nivel: updateRolDto.nivel,
-      Area: updateRolDto.area,
-    };
-    this.roles.push(rol);
-    return rol;
-  }
-  deleteRol(idrol: number) {
-    const rolDB = this.findByPk(idrol);
-    return rolDB;
   }
 }
