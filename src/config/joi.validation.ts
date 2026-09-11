@@ -18,4 +18,5 @@ export const EnvValidationSchema = Joi.object({
   CORS_URL: Joi.string().uri().default('http://localhost:3000'),
   JWT_SECRET: Joi.string().required(),
   JWT_REFRESH: Joi.string().required(),
+  MAPBOX_API_KEY: Joi.string().required(),
 });

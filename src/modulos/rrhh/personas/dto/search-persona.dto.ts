@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
   IsIn,
@@ -11,6 +11,7 @@ import {
 
 export class SearchPersonaDto {
   @IsOptional()
+  @Type(() => Number)
   @IsInt({ message: 'El número de empleado debe ser un entero' })
   @Min(1)
   readonly numempleado?: number;
@@ -51,6 +52,7 @@ export class SearchPersonaDto {
   readonly activo?: boolean;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt({ message: 'El nivel debe ser un entero' })
   @Min(1)
   readonly nivel?: number;

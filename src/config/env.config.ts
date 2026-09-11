@@ -11,4 +11,5 @@ export const EnvConfiguration = () => ({
   corsUurl: process.env.CORS_URL,
   jwtSecret: process.env.JWT_SECRET,
   jwtRefresh: process.env.JWT_REFRESH,
+  mapboxApiKey: process.env.MAPBOX_API_KEY,
 });

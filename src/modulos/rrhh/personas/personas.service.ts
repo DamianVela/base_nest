@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Persona } from '../../entities/personal.entity';
+import { Persona } from '../../../entities/personal.entity';
 import { Like, Repository } from 'typeorm';
 import { SearchPersonaDto } from './dto/search-persona.dto';
-import { PaginacionDto } from '../../common/dto/pagination.dto';
+import { PaginacionDto } from '../../../common/dto/pagination.dto';
 
 @Injectable()
 export class PersonasService {

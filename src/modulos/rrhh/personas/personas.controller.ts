@@ -1,9 +1,9 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { PersonasService } from './personas.service';
 import { SearchPersonaDto } from './dto/search-persona.dto';
-import { PaginacionDto } from '../../common/dto/pagination.dto';
+import { PaginacionDto } from '../../../common/dto/pagination.dto';
 
-@Controller(['rrhh', 'personas'])
+@Controller('rrhh/personas')
 export class PersonasController {
   constructor(private readonly personasService: PersonasService) {}
   @Get()

@@ -9,14 +9,14 @@ export class Ubicacion {
   @Column({
     type: 'varchar',
     length: 32,
-    nullable: true,
+    nullable: false,
   })
   Pais: string;
 
   @Column({
     type: 'varchar',
     length: 32,
-    nullable: true,
+    nullable: false,
   })
   Estado: string;
 
