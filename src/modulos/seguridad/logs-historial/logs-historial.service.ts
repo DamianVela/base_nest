@@ -18,6 +18,7 @@ export class LogsHistorialService {
   constructor(
     @InjectRepository(LogHistorial)
     private readonly logsHistorialRepository: Repository<LogHistorial>,
+    @InjectRepository(Rol)
     private readonly rolRepository: Repository<Rol>,
   ) {}
   async findAll(
