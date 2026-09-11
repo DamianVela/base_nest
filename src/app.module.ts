@@ -11,6 +11,7 @@ import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
 import { AuthModule } from './auth/auth.module';
 import { AgentesModule } from './agentes/agentes.module';
 import { SocketsModule } from './sockets/sockets.module';
+import { PermisosModule } from './modulos/rrhh/permisos/permisos.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { SocketsModule } from './sockets/sockets.module';
     AuthModule,
     AgentesModule,
     SocketsModule,
+    PermisosModule,
   ],
 })
 export class AppModule {}
