@@ -1,16 +1,19 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RrhhModule } from './modulos/rrhh/rrhh.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { RrhhModule } from './modulos/rrhh/rrhh.module';
 import { join } from 'path';
 import { EnvConfiguration } from './config/env.config';
 import { EnvValidationSchema } from './config/joi.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
 import { AuthModule } from './auth/auth.module';
+import { AgentesModule } from './agentes/agentes.module';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [EnvConfiguration],
@@ -39,6 +42,7 @@ import { AuthModule } from './auth/auth.module';
     RrhhModule,
     UbicacionesModule,
     AuthModule,
+    AgentesModule,
   ],
 })
 export class AppModule {}
