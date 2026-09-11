@@ -11,6 +11,8 @@ import { GeocodeUbicacionDto } from './dto/geocode-ubicacion.dto';
 import { AxiosAdapter } from '../../common/adapters/axios.adapter';
 import { CodPostUbicacionDto } from './dto/codpostal-ubicacion.dto';
 import { MapboxPostalCodeResponse } from './interfaces/codpostal.interface';
+import { JwtPayload } from '../../auth/interfaces/jwt-payload.interface';
+import { LogHistorial } from '../../entities/log-historial.entity';
 
 @Injectable()
 export class UbicacionesService {
@@ -55,7 +57,7 @@ export class UbicacionesService {
       ubicaciones,
     };
   }
-  async agregarSiNoExiste(ubicacion: CrearUbicacionDto) {
+  async agregarSiNoExiste(ubicacion: CrearUbicacionDto, usuario: JwtPayload) {
     const {
       pais,
       estado,
@@ -77,7 +79,12 @@ export class UbicacionesService {
       },
     });
     if (ubiE) {
-      return { ubicacion: ubiE };
+      return {
+        ubicacion: {
+          ...ubiE,
+          coordenadas: [ubiE.Latitud, ubiE.Longitud],
+        },
+      };
     }
     return await this.dataSource.transaction(async (manager) => {
       const resultado = await manager.insert(Ubicacion, {
@@ -90,8 +97,18 @@ export class UbicacionesService {
         Latitud: latitud,
         Longitud: longitud,
       });
+      const idUbicacion = resultado.identifiers[0].IdUbicacion;
+      await manager.insert(LogHistorial, {
+        Titulo: 'CATÁLOGOS',
+        SubTitulo: 'UBICACIONES',
+        Accion: 'CREAR',
+        Referencia: `IdUbicacion: ${idUbicacion}`,
+        IdPersona: usuario.id,
+      });
       return {
-        IdUbicacion: resultado.identifiers[0].IdUbicacion,
+        IdUbicacion: idUbicacion,
+        ...resultado,
+        coordenadas: [latitud, longitud],
       };
     });
   }

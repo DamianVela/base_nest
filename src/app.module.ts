@@ -7,6 +7,7 @@ import { EnvConfiguration } from './config/env.config';
 import { EnvValidationSchema } from './config/joi.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
     RrhhModule,
     UbicacionesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

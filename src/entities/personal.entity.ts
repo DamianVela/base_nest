@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   Entity,
   JoinColumn,
@@ -7,6 +8,7 @@ import {
 } from 'typeorm';
 import { Rol } from './rol.entity';
 import { Ubicacion } from './ubicacion.entity';
+import bcrypt from 'bcrypt';
 
 @Entity('PERSONAL')
 export class Persona {
@@ -140,6 +142,11 @@ export class Persona {
     nullable: true,
   })
   IdUbicacion: number;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.Clave = await bcrypt.hash(this.Clave, 10);
+  }
 
   // PERSONA → ROL
   @ManyToOne(() => Rol, (rol) => rol.personas)

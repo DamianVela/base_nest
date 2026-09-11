@@ -5,4 +5,4 @@ import { AxiosAdapter } from '../adapters/axios.adapter';
   providers: [AxiosAdapter],
   exports: [AxiosAdapter],
 })
-export class AppModule {}
+export class CommonModule {}
