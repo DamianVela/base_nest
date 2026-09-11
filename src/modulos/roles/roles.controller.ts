@@ -2,7 +2,7 @@ import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { SearchRolDto } from './dto/search-rol.dto';
 
-@Controller('roles')
+@Controller(['rrhh', 'roles'])
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
   @Get()

@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsIn,
   IsInt,
@@ -16,6 +17,7 @@ export class SearchRolDto {
   readonly descripcion?: string;
 
   @IsOptional()
+  @Type(() => Number)
   @IsInt({ message: 'El nivel debe ser un entero' })
   @Min(1)
   readonly nivel?: number;

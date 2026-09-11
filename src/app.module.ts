@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RolesModule } from './roles/roles.module';
+import { RolesModule } from './modulos/roles/roles.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { EnvConfiguration } from './config/env.config';
 import { EnvValidationSchema } from './config/joi.validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PersonasModule } from './modulos/personas/personas.module';
+import { UbicacionesModule } from './modulos/ubicaciones/ubicaciones.module';
 
 @Module({
   imports: [
@@ -33,8 +35,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         synchronize: false,
       }),
     }),
-    RolesModule,
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'public') }),
+    RolesModule,
+    PersonasModule,
+    UbicacionesModule,
   ],
 })
 export class AppModule {}

@@ -56,12 +56,20 @@ export class Ubicacion {
   NumeroExterior: string;
 
   @Column({
-    type: 'geometry',
-    spatialFeatureType: 'Point',
-    srid: 4326,
+    type: 'decimal',
+    precision: 10,
+    scale: 7,
     nullable: false,
   })
-  Coordenadas: string;
+  Latitud: number;
+
+  @Column({
+    type: 'decimal',
+    precision: 10,
+    scale: 7,
+    nullable: false,
+  })
+  Longitud: number;
 
   @OneToMany(() => Persona, (persona) => persona.ubicacion) personal: Persona[];
 }
