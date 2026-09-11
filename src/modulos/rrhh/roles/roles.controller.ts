@@ -16,6 +16,7 @@ export class RolesController {
   @Get()
   @UseGuards(JwtAuthGuard)
   getAllRoles(@Query() searchRolDto: SearchRolDto) {
+    console.log('ENTRÓ A GET /rrhh/roles');
     return this.rolesService.findAll(searchRolDto);
   }
 
