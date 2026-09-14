@@ -34,14 +34,14 @@ export class AuthService {
   async login(body: LoginDto, dirip: string, dispositivo: string) {
     const [persona, tokenPasado] = await Promise.all([
       //persona
-      this.personasRepository.findOne({
-        where: {
-          Usuario: body.usuario,
-        },
-        relations: {
-          rol: true,
-        },
-      }),
+      this.personasRepository
+        .createQueryBuilder('persona')
+        .leftJoinAndSelect('persona.rol', 'rol')
+        .addSelect(['persona.Usuario', 'persona.Clave'])
+        .where('persona.Usuario = :usuario', {
+          usuario: body.usuario,
+        })
+        .getOne(),
       //tokenPasado
       this.sesionesRepository.findOne({
         where: {

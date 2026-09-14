@@ -48,6 +48,7 @@ export class Persona {
     length: 20,
     nullable: false,
     unique: true,
+    select: false,
   })
   Usuario: string;
 
@@ -55,6 +56,7 @@ export class Persona {
     type: 'varchar',
     length: 255,
     nullable: true,
+    select: false,
   })
   Clave: string;
 
