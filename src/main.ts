@@ -7,6 +7,7 @@ import { apiLimiter } from './common/middlewares/rate-limiters';
 
 async function main() {
   const app = await NestFactory.create(AppModule);
+  app.set('trust proxy', 1);
   const configService = app.get(ConfigService);
   app.use(cookieParser());
   app.useGlobalPipes(
